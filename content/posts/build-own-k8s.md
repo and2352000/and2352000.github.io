@@ -2,6 +2,8 @@
 title: "成為擁有 k8s 的辣個男人(女人)"
 date: 2022-08-23T14:01:30+08:00
 draft: false
+category: "Infrastructure"
+tags: [ "k8s" ]
 ---
 
 ## 環境準備
