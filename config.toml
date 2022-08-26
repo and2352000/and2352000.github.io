@@ -1,6 +1,6 @@
 baseURL = 'https://and2352000.github.io'
 languageCode = 'en-us'
-title = 'Aaron Blog'
+title = "Aaron's Blog"
 theme = "ananke"
 
 [taxonomies]
