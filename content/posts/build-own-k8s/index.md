@@ -1,9 +1,9 @@
 ---
-title: "成為擁有 k8s 的辣個男人(女人)"
+title: "K8S DIY 架設手作"
 date: 2022-08-23T14:01:30+08:00
 draft: false
 category: "Infrastructure"
-tags: [ "k8s" ]
+tags: [ "k8s", "docker" ]
 ---
 
 ## 環境準備
