@@ -16,6 +16,7 @@ tags: [ "k8s" ]
 - 一台 LoadBalancer 兼防火牆
 - Gitlab 帳號
 
+![My Computer](images/my_computer.png)
 ## Bootstrapping clusters with kubeadm
 
 官方安裝教學：https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
