@@ -6,3 +6,5 @@ theme = "mini"
 [taxonomies]
   category = 'categories'
   tag = 'tags'
+
+googleAnalytics="G-0YBZ467R0Y"
