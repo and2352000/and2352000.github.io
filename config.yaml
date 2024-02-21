@@ -1,0 +1,12 @@
+baseURL: 'https://and2352000.github.io'
+languageCode: 'en-us'
+title: "Aaron's Blog"
+theme: "mini"
+
+taxonomies:
+  category: 'categories'
+  tag: 'tags'
+  
+googleAnalytics: "G-0YBZ467R0Y"
+params:
+  enableGoogleAnalytics: true 
