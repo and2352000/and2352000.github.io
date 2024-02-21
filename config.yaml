@@ -10,3 +10,4 @@ taxonomies:
 googleAnalytics: "G-0YBZ467R0Y"
 params:
   enableGoogleAnalytics: true 
+  hiddenPostSummaryInHomePage: true
