@@ -1,1 +1,4 @@
 .DS_Store
+public/**/*
+!public/.gitkeep
+!public/CNAME
