@@ -130,4 +130,4 @@ from
 ```
 
 REF: [Migration from PostgreSQL to Alloy DB for accelerating
-GenAl Vector Search & Embedding 參考資料]('https://docs.google.com/document/d/1mvST8zbHH7cOvEL0VQUARzyIiqdNyX_gPjfOU-8NIRs/edit')
+GenAl Vector Search & Embedding 參考資料](https://docs.google.com/document/d/1mvST8zbHH7cOvEL0VQUARzyIiqdNyX_gPjfOU-8NIRs/edit)
