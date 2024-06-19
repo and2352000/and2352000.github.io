@@ -1,5 +1,5 @@
 ---
-title: "Google Cloud Submit Review"
+title: "Google Cloud Summit Review"
 date: 2024-06-17T14:09:20+08:00
 draft: false
 category: "AI"
@@ -7,7 +7,7 @@ tags: ["AI", "Google", "LLM", "Aolly", "Embedding"]
 ---
 ![Begin](images/begin.JPG)
 
-# 這次的 Google Cloud Submit 可以用 AI 來總結
+# 這次的 Google Cloud Summit 可以用 AI 來總結
 
 ## 副標題可以叫做 RAG(Retrieval-Augmented Generation)
 
