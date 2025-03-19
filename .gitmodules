@@ -1,24 +1,3 @@
-[submodule "themes/ananke"]
-	path = themes/ananke
-	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
-[submodule "themes/hugo-theme-serial-programmer"]
-	path = themes/hugo-theme-serial-programmer
-	url = git@github.com:sharadcodes/hugo-theme-serial-programmer.git
-[submodule "themes/digital-garden-hugo-theme"]
-	path = themes/digital-garden-hugo-theme
-	url = git@github.com:apvarun/digital-garden-hugo-theme.git
-[submodule "themes/LoveIt"]
-	path = themes/LoveIt
-	url = git@github.com:dillonzq/LoveIt.git
-[submodule "themes/noteworthy"]
-	path = themes/noteworthy
-	url = https://github.com/kimcc/hugo-theme-noteworthy.git
-[submodule "themes/hugo.386"]
-	path = themes/hugo.386
-	url = https://gitlab.com/maxlefou/hugo.386
-[submodule "themes/base16"]
-	path = themes/base16
-	url = https://github.com/htdvisser/hugo-base16-theme.git
 [submodule "themes/mini"]
 	path = themes/mini
-	url = https://github.com/nodejh/hugo-theme-mini.git
+	url = https://github.com/and2352000/hugo-theme-mini.git
