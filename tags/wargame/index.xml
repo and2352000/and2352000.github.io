@@ -1,4 +1,44 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Wargame on Aaron's Blog</title><link>https://and2352000.github.io/tags/wargame/</link><description>Recent content in Wargame on Aaron's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 07 Feb 2019 14:01:30 +0800</lastBuildDate><atom:link href="https://and2352000.github.io/tags/wargame/index.xml" rel="self" type="application/rss+xml"/><item><title>Overthewire</title><link>https://and2352000.github.io/posts/overthewire/</link><pubDate>Thu, 07 Feb 2019 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/overthewire/</guid><description>Bandit 🔗Level0 🔗Password : bandit0 Level0-&amp;gt;Level1 🔗Password : boJ9jbbUNNfktd78OOpsqOltutMc3MY1 Level1-&amp;gt;Level2 🔗Level2-&amp;gt;Level3 🔗Level3-&amp;gt;Level4 🔗Level4-&amp;gt;Level5 🔗Password : pIwrPrtPN36QITSp3EQaw936yaFoFgAB Level5-&amp;gt;Level6 🔗Password : koReBOKuIDDepwhWk7jZC0RTdopnAYKh Level6-&amp;gt;Level7 🔗Password : DXjZPULLxYr17uwoI01bNLQbtFemEgo7 Level7-&amp;gt;Level8 🔗Password : HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs Level8-&amp;gt;Level9 🔗Password : cvX2JJa4CFALtqS87jk27qwqGhBM9plV Level9-&amp;gt;Level10 🔗Password : UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR Level10-&amp;gt;Level11 🔗Password : truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk | | | | |
-Level17-&amp;gt;Level18 🔗Password : kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd Level18-&amp;gt;Level19 🔗$ ssh bandit18@bandit.labs.overthewire.org cat readme IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x Password : IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x :::info :mag:ssh後面可以接指令，當ssh執行指令完成後，預設會中斷連線。
-:::
-Level19-&amp;gt;Level20 🔗$ ./bandit20-do cat /etc/bandit_pass/bandit20 Password : GbKksEFF4yrVs6il55v6gwY5aVje5f0j :::info :mag: setuid : 在執行程式時，程式執行的身份為啟動該程式的user，若設為setuid，則該程式在執行身份就改為該程式的Owner。 :::</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Wargame on Aaron's Blog</title><link>https://and2352000.github.io/tags/wargame/</link><description>Recent content in Wargame on Aaron's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 07 Feb 2019 14:01:30 +0800</lastBuildDate><atom:link href="https://and2352000.github.io/tags/wargame/index.xml" rel="self" type="application/rss+xml"/><item><title>Overthewire</title><link>https://and2352000.github.io/posts/overthewire/</link><pubDate>Thu, 07 Feb 2019 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/overthewire/</guid><description>&lt;h2 id="bandit">Bandit &lt;a href="#bandit" class="anchor">🔗&lt;/a>&lt;/h2>&lt;h3 id="level0">Level0 &lt;a href="#level0" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : bandit0
+&lt;/code>&lt;/pre>&lt;h3 id="level0-level1">Level0-&amp;gt;Level1 &lt;a href="#level0-level1" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+&lt;/code>&lt;/pre>&lt;h3 id="level1-level2">Level1-&amp;gt;Level2 &lt;a href="#level1-level2" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>&lt;/code>&lt;/pre>&lt;h3 id="level2-level3">Level2-&amp;gt;Level3 &lt;a href="#level2-level3" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>&lt;/code>&lt;/pre>&lt;h3 id="level3-level4">Level3-&amp;gt;Level4 &lt;a href="#level3-level4" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>&lt;/code>&lt;/pre>&lt;h3 id="level4-level5">Level4-&amp;gt;Level5 &lt;a href="#level4-level5" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+&lt;/code>&lt;/pre>&lt;h3 id="level5-level6">Level5-&amp;gt;Level6 &lt;a href="#level5-level6" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+&lt;/code>&lt;/pre>&lt;h3 id="level6-level7">Level6-&amp;gt;Level7 &lt;a href="#level6-level7" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+&lt;/code>&lt;/pre>&lt;h3 id="level7-level8">Level7-&amp;gt;Level8 &lt;a href="#level7-level8" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+&lt;/code>&lt;/pre>&lt;h3 id="level8-level9">Level8-&amp;gt;Level9 &lt;a href="#level8-level9" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+&lt;/code>&lt;/pre>&lt;h3 id="level9-level10">Level9-&amp;gt;Level10 &lt;a href="#level9-level10" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+&lt;/code>&lt;/pre>&lt;h3 id="level10-level11">Level10-&amp;gt;Level11 &lt;a href="#level10-level11" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+&lt;/code>&lt;/pre>&lt;p>|
+|
+|
+|
+|&lt;/p>
+&lt;h3 id="level17-level18">Level17-&amp;gt;Level18 &lt;a href="#level17-level18" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+&lt;/code>&lt;/pre>&lt;h3 id="level18-level19">Level18-&amp;gt;Level19 &lt;a href="#level18-level19" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>$ ssh bandit18@bandit.labs.overthewire.org cat readme
+IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+
+Password : IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+&lt;/code>&lt;/pre>&lt;p>:::info
+:mag:ssh後面可以接指令，當ssh執行指令完成後，預設會中斷連線。&lt;/p>
+&lt;p>:::&lt;/p>
+&lt;h3 id="level19-level20">Level19-&amp;gt;Level20 &lt;a href="#level19-level20" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>$ ./bandit20-do cat /etc/bandit_pass/bandit20
+
+Password : GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+&lt;/code>&lt;/pre>&lt;p>:::info
+:mag: setuid : 在執行程式時，程式執行的身份為啟動該程式的user，若設為setuid，則該程式在執行身份就改為該程式的Owner。
+:::&lt;/p>
+&lt;h3 id="level20-level21">Level20-&amp;gt;Level21 &lt;a href="#level20-level21" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>//使用tmux 開啟兩的terminal
+$ tmux
+
+//進入terminal 0,並進入terminal 1
+$tmux new-window
+
+//使用nc -l 開啟一個port,並把要傳輸的檔案放入
+$ nc -l 32123 &amp;lt; /etc/bandit_pass/bandit20
+
+// ctrl+b 再按0,進入termainal 0
+$./suconnect 32123
+
+Password : gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
+&lt;/code>&lt;/pre>&lt;p>:::info
+:mag: 指令tmux 可以在同一個視窗管理不同session的terminal
+:::&lt;/p></description></item></channel></rss>

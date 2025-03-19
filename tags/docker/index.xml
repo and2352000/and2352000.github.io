@@ -1,2 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on Aaron's Blog</title><link>https://and2352000.github.io/tags/docker/</link><description>Recent content in Docker on Aaron's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 23 Aug 2022 14:01:30 +0800</lastBuildDate><atom:link href="https://and2352000.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>K8S DIY 架設手作</title><link>https://and2352000.github.io/posts/build-own-k8s/</link><pubDate>Tue, 23 Aug 2022 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/build-own-k8s/</guid><description>環境準備 🔗 Public IP Domain Name 一台主機 灌好 Nginx 作為這台主機的入口 申請好 TLS 所需的憑證 一台 LoadBalancer 兼防火牆 Gitlab 帳號 Bootstrapping clusters with kubeadm 🔗官方安裝教學：https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
-A compatible Linux host. The Kubernetes project provides generic instructions for Linux distributions based on Debian and Red Hat, and those distributions without a package manager. 2 GB or more of RAM per machine (any less will leave little room for your apps). 2 CPUs or more. Full network connectivity between all machines in the cluster (public or private network is fine).</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on Aaron's Blog</title><link>https://and2352000.github.io/tags/docker/</link><description>Recent content in Docker on Aaron's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 23 Aug 2022 14:01:30 +0800</lastBuildDate><atom:link href="https://and2352000.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>K8S DIY 架設手作</title><link>https://and2352000.github.io/posts/build-own-k8s/</link><pubDate>Tue, 23 Aug 2022 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/build-own-k8s/</guid><description>&lt;h2 id="環境準備">環境準備 &lt;a href="#%e7%92%b0%e5%a2%83%e6%ba%96%e5%82%99" class="anchor">🔗&lt;/a>&lt;/h2>&lt;ul>
+&lt;li>Public IP&lt;/li>
+&lt;li>Domain Name&lt;/li>
+&lt;li>一台主機
+&lt;ul>
+&lt;li>灌好 Nginx 作為這台主機的入口&lt;/li>
+&lt;li>申請好 TLS 所需的憑證&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>一台 LoadBalancer 兼防火牆&lt;/li>
+&lt;li>Gitlab 帳號&lt;/li>
+&lt;/ul>
+&lt;p>&lt;p class="markdown-image">
+ &lt;img src="images/my_computer.png" alt="My Computer" />
+&lt;/p>&lt;/p>
+&lt;h2 id="bootstrapping-clusters-with-kubeadm">Bootstrapping clusters with kubeadm &lt;a href="#bootstrapping-clusters-with-kubeadm" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>官方安裝教學：https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/&lt;/p>
+&lt;ul>
+&lt;li>A compatible Linux host. The Kubernetes project provides generic instructions for Linux distributions based on Debian and Red Hat, and those distributions without a package manager.&lt;/li>
+&lt;li>2 GB or more of RAM per machine (any less will leave little room for your apps).&lt;/li>
+&lt;li>2 CPUs or more.&lt;/li>
+&lt;li>Full network connectivity between all machines in the cluster (public or private network is fine).&lt;/li>
+&lt;li>Unique hostname, MAC address, and product_uuid for every node. See here for more details.&lt;/li>
+&lt;li>Certain ports are open on your machines. See here for more details.&lt;/li>
+&lt;li>Swap disabled. You MUST disable swap in order for the kubelet to work properly.&lt;/li>
+&lt;/ul>
+&lt;h2 id="installing-a-container-runtime">Installing a container runtime &lt;a href="#installing-a-container-runtime" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>這裡可以選用你喜歡的，我選用 docker&lt;/p></description></item></channel></rss>

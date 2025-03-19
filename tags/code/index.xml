@@ -1,7 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code on Aaron's Blog</title><link>https://and2352000.github.io/tags/code/</link><description>Recent content in Code on Aaron's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 26 Feb 2024 15:07:57 +0800</lastBuildDate><atom:link href="https://and2352000.github.io/tags/code/index.xml" rel="self" type="application/rss+xml"/><item><title>Manage Nodejs Heap in Docker</title><link>https://and2352000.github.io/posts/7-manage-nodejs-heap-in-docker/</link><pubDate>Mon, 26 Feb 2024 15:07:57 +0800</pubDate><guid>https://and2352000.github.io/posts/7-manage-nodejs-heap-in-docker/</guid><description>Container 記憶體調整 🔗在 local 調整 container 記憶體如下
-docker run --memory 1024m --interactive --tty ravali1906/dockermemory bash 但是這樣會有一個問題，有由於 container default 有 swap，所以即便用超過也不會Out of memory
-這段程式碼程式碼會 allocate 1024MB
-const buf = Buffer.alloc(+process.argv[2] * 1024 * 1024) console.log(Math.round(buf.length / (1024 * 1024))) console.log(Math.round(process.memoryUsage().rss / (1024 * 1024))) 執行結果
-$ node buffer_example 2000 2000 16 以上這段程式碼是參考 ref1 其實是有問題的 Buffer.alloc 並不會用使用到 heap
-我有重新實作但是還不完整&amp;hellip;..
-memoryUsage 有四個資訊 heapTotal and heapUsed refer to V8&amp;rsquo;s memory usage. external refers to the memory usage of C++ objects bound to JavaScript objects managed by V8.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code on Aaron's Blog</title><link>https://and2352000.github.io/tags/code/</link><description>Recent content in Code on Aaron's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 26 Feb 2024 15:07:57 +0800</lastBuildDate><atom:link href="https://and2352000.github.io/tags/code/index.xml" rel="self" type="application/rss+xml"/><item><title>Manage Nodejs Heap in Docker</title><link>https://and2352000.github.io/posts/7-manage-nodejs-heap-in-docker/</link><pubDate>Mon, 26 Feb 2024 15:07:57 +0800</pubDate><guid>https://and2352000.github.io/posts/7-manage-nodejs-heap-in-docker/</guid><description>&lt;h2 id="container-記憶體調整">Container 記憶體調整 &lt;a href="#container-%e8%a8%98%e6%86%b6%e9%ab%94%e8%aa%bf%e6%95%b4" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>在 local 調整 container 記憶體如下&lt;/p>
+&lt;pre tabindex="0">&lt;code>docker run --memory 1024m --interactive --tty ravali1906/dockermemory bash
+&lt;/code>&lt;/pre>&lt;p>但是這樣會有一個問題，有由於 container default 有 swap，所以即便用超過也不會Out of memory&lt;/p>
+&lt;p>這段程式碼程式碼會 allocate 1024MB&lt;/p>
+&lt;pre tabindex="0">&lt;code>const buf = Buffer.alloc(+process.argv[2] * 1024 * 1024)
+console.log(Math.round(buf.length / (1024 * 1024)))
+console.log(Math.round(process.memoryUsage().rss / (1024 * 1024)))
+&lt;/code>&lt;/pre>&lt;p>執行結果&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ node buffer_example 2000
+2000
+16
+&lt;/code>&lt;/pre>&lt;p>以上這段程式碼是參考 ref1 其實是有問題的 Buffer.alloc 並不會用使用到 heap&lt;/p>
+&lt;p>我有重新實作但是還不完整&amp;hellip;..&lt;/p>
+&lt;ul>
+&lt;li>memoryUsage 有四個資訊
+&lt;ol>
+&lt;li>heapTotal and heapUsed refer to V8&amp;rsquo;s memory usage.&lt;/li>
+&lt;li>external refers to the memory usage of C++ objects bound to JavaScript objects managed by V8.&lt;/li>
+&lt;li>rss, Resident Set Size, is the amount of space occupied in the main memory device (that is a subset of the total allocated memory) for the process, including all C++ and JavaScript objects and code.&lt;/li>
+&lt;li>arrayBuffers refers to memory allocated for ArrayBuffers and SharedArrayBuffers, including all Node.js Buffers. This is also included in the external value. When Node.js is used as an embedded library, this value may be 0 because allocations for ArrayBuffers may not be tracked in that case.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;p>如果要檢查 container 的記憶體大小可以看這裡&lt;/p></description></item></channel></rss>

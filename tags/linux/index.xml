@@ -1,10 +1,126 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Aaron's Blog</title><link>https://and2352000.github.io/tags/linux/</link><description>Recent content in Linux on Aaron's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 07 Jun 2021 14:01:30 +0800</lastBuildDate><atom:link href="https://and2352000.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Make your own linux laptop</title><link>https://and2352000.github.io/posts/make-your-own-linux-laptop/</link><pubDate>Mon, 07 Jun 2021 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/make-your-own-linux-laptop/</guid><description>Make XPS13 Linux laptop 🔗筆電挑選 🔗Dell XPS13 支援 通過 Ubuntu 認證
-灌系統 選擇版本 顯示卡驅動 wifi驅動 🔗待補&amp;hellip;
-雙系統 dual os 🔗 https://medium.com/@josef.andersson/dual-boot-windows-10-and-ubuntu-18-10-on-dell-xps-9370-1a77ae9716bc https://estl.tech/dual-boot-ubuntu-on-dell-xps-1365df21b947 leagcy vs uefi 🔗磁區分割 🔗itread01.com/content/1549288804.html?fbclid=IwAR17jW3QC2M0FJjNWrbI5p_BFYBmQFN4g7kmvYqyfwR7IUKzFF_5BNEz7DY
-Grub 🔗The Dell XPS 13 came with a 4K screen. Unfortunately, the GRUB bootloader does not scale the text so everything was really tiny. It was really hard to see what operating system was selected for boot. This AskUbuntu page has the solution. Similar to the comment by Bernard Wei, the videoinfo command did not work for me.</description></item><item><title>Linux Tips</title><link>https://and2352000.github.io/posts/overthewire-copy/</link><pubDate>Tue, 07 Apr 2020 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/overthewire-copy/</guid><description>tmux(切割終端視窗＆保存工作狀態) 🔗按任何快捷鍵之前要先按 Ctrl + b
-Pane
-指令 說明 % 水平分割 &amp;quot; 垂直分割 方向鍵 切換pane x 刪除當前的pane Pane內操作
-指令 說明 [ Scroll in pane (q to Quit) 修改Pane分配比例，按下Ctrl+B，之後放開B並按上下左右調整視窗分配比 Ｍac的部分如果無法使用則可以參考這篇(mac可以改輸出的Acsii)
-Window
-指令 說明 c 創建新的window &amp;amp; 關閉目前的window p 切換到上一個window n 切換到下一個window Session
-指令 說明 tmux 開啟一個新的session tmux ls 查看所有session tmux attach -t 0 重新連線到session 0 tmux kill-session -t 0 刪除 session 0 d 跳出並保存當前session s 切換session Ubuntu 關閉 window 🔗 Stop windows of ubuntu(節省資源) sudo service lightdm stop User 換 shell 🔗chsh -s [/bin/bash] Ubuntu apt 檢查version&amp;amp;安裝 🔗#check apt-cache madison &amp;lt;&amp;lt;package name&amp;gt;&amp;gt; #install apt-get install &amp;lt;&amp;lt;package name&amp;gt;&amp;gt;=&amp;lt;&amp;lt;version&amp;gt;&amp;gt; https://www.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Aaron's Blog</title><link>https://and2352000.github.io/tags/linux/</link><description>Recent content in Linux on Aaron's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 07 Jun 2021 14:01:30 +0800</lastBuildDate><atom:link href="https://and2352000.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Make your own linux laptop</title><link>https://and2352000.github.io/posts/make-your-own-linux-laptop/</link><pubDate>Mon, 07 Jun 2021 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/make-your-own-linux-laptop/</guid><description>&lt;h1 id="make-xps13-linux-laptop">Make XPS13 Linux laptop &lt;a href="#make-xps13-linux-laptop" class="anchor">🔗&lt;/a>&lt;/h1>&lt;h2 id="筆電挑選">筆電挑選 &lt;a href="#%e7%ad%86%e9%9b%bb%e6%8c%91%e9%81%b8" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>Dell XPS13 支援 通過 Ubuntu 認證&lt;/p>
+&lt;h2 id="灌系統-選擇版本-顯示卡驅動-wifi驅動">灌系統 選擇版本 顯示卡驅動 wifi驅動 &lt;a href="#%e7%81%8c%e7%b3%bb%e7%b5%b1-%e9%81%b8%e6%93%87%e7%89%88%e6%9c%ac-%e9%a1%af%e7%a4%ba%e5%8d%a1%e9%a9%85%e5%8b%95-wifi%e9%a9%85%e5%8b%95" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>待補&amp;hellip;&lt;/p>
+&lt;h2 id="雙系統-dual-os">雙系統 dual os &lt;a href="#%e9%9b%99%e7%b3%bb%e7%b5%b1-dual-os" class="anchor">🔗&lt;/a>&lt;/h2>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/@josef.andersson/dual-boot-windows-10-and-ubuntu-18-10-on-dell-xps-9370-1a77ae9716bc" target="_blank" rel="noopener">https://medium.com/@josef.andersson/dual-boot-windows-10-and-ubuntu-18-10-on-dell-xps-9370-1a77ae9716bc&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://estl.tech/dual-boot-ubuntu-on-dell-xps-1365df21b947" target="_blank" rel="noopener">https://estl.tech/dual-boot-ubuntu-on-dell-xps-1365df21b947&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="leagcy-vs-uefi">leagcy vs uefi &lt;a href="#leagcy-vs-uefi" class="anchor">🔗&lt;/a>&lt;/h2>&lt;h2 id="磁區分割">磁區分割 &lt;a href="#%e7%a3%81%e5%8d%80%e5%88%86%e5%89%b2" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>itread01.com/content/1549288804.html?fbclid=IwAR17jW3QC2M0FJjNWrbI5p_BFYBmQFN4g7kmvYqyfwR7IUKzFF_5BNEz7DY&lt;/p>
+&lt;h2 id="grub">Grub &lt;a href="#grub" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>The Dell XPS 13 came with a 4K screen. Unfortunately, the GRUB bootloader does not scale the text so everything was really tiny. It was really hard to see what operating system was selected for boot.
+This AskUbuntu page has the solution. Similar to the comment by Bernard Wei, the videoinfo command did not work for me. 1024x768 and 1280x1024 were both okay but not 1920x1080.&lt;/p></description></item><item><title>Linux Tips</title><link>https://and2352000.github.io/posts/overthewire-copy/</link><pubDate>Tue, 07 Apr 2020 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/overthewire-copy/</guid><description>&lt;h2 id="tmux切割終端視窗保存工作狀態">tmux(切割終端視窗＆保存工作狀態) &lt;a href="#tmux%e5%88%87%e5%89%b2%e7%b5%82%e7%ab%af%e8%a6%96%e7%aa%97%e4%bf%9d%e5%ad%98%e5%b7%a5%e4%bd%9c%e7%8b%80%e6%85%8b" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>按任何快捷鍵之前要先按 Ctrl + b&lt;/p>
+&lt;p>Pane&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>指令&lt;/th>
+ &lt;th>說明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>%&lt;/td>
+ &lt;td>水平分割&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&amp;quot;&lt;/td>
+ &lt;td>垂直分割&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>方向鍵&lt;/td>
+ &lt;td>切換pane&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>x&lt;/td>
+ &lt;td>刪除當前的pane&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>Pane內操作&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>指令&lt;/th>
+ &lt;th>說明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>[&lt;/td>
+ &lt;td>Scroll in pane (q to Quit)&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>修改Pane分配比例，按下Ctrl+B，之後放開B並按上下左右調整視窗分配比
+Ｍac的部分如果無法使用則可以參考&lt;a href="https://superuser.com/questions/660013/resizing-pane-is-not-working-for-tmux-on-mac" target="_blank" rel="noopener">這篇&lt;/a>(mac可以改輸出的Acsii)&lt;/p>
+&lt;p>Window&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>指令&lt;/th>
+ &lt;th>說明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>c&lt;/td>
+ &lt;td>創建新的window&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&amp;amp;&lt;/td>
+ &lt;td>關閉目前的window&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>p&lt;/td>
+ &lt;td>切換到上一個window&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>n&lt;/td>
+ &lt;td>切換到下一個window&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>Session&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>指令&lt;/th>
+ &lt;th>說明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>tmux&lt;/td>
+ &lt;td>開啟一個新的session&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>tmux ls&lt;/td>
+ &lt;td>查看所有session&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>tmux attach -t 0&lt;/td>
+ &lt;td>重新連線到session 0&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>tmux kill-session -t 0&lt;/td>
+ &lt;td>刪除 session 0&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>d&lt;/td>
+ &lt;td>跳出並保存當前session&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>s&lt;/td>
+ &lt;td>切換session&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="ubuntu-關閉-window">Ubuntu 關閉 window &lt;a href="#ubuntu-%e9%97%9c%e9%96%89-window" class="anchor">🔗&lt;/a>&lt;/h2>&lt;ul>
+&lt;li>Stop windows of ubuntu(節省資源)&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code class="language-shell=" data-lang="shell=">sudo service lightdm stop
+&lt;/code>&lt;/pre>&lt;h2 id="user-換-shell">User 換 shell &lt;a href="#user-%e6%8f%9b-shell" class="anchor">🔗&lt;/a>&lt;/h2>&lt;pre tabindex="0">&lt;code class="language-shell=" data-lang="shell=">chsh -s [/bin/bash]
+&lt;/code>&lt;/pre>&lt;h2 id="ubuntu-apt-檢查version安裝">Ubuntu apt 檢查version&amp;amp;安裝 &lt;a href="#ubuntu-apt-%e6%aa%a2%e6%9f%a5version%e5%ae%89%e8%a3%9d" class="anchor">🔗&lt;/a>&lt;/h2>&lt;pre tabindex="0">&lt;code class="language-shell=" data-lang="shell=">#check
+apt-cache madison &amp;lt;&amp;lt;package name&amp;gt;&amp;gt;
+
+#install
+apt-get install &amp;lt;&amp;lt;package name&amp;gt;&amp;gt;=&amp;lt;&amp;lt;version&amp;gt;&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://www.cnblogs.com/EasonJim/p/7144017.html" target="_blank" rel="noopener">https://www.cnblogs.com/EasonJim/p/7144017.html&lt;/a>&lt;/p></description></item></channel></rss>

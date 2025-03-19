@@ -1,33 +1,290 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Aaron's Blog</title><link>https://and2352000.github.io/posts/</link><description>Recent content in Posts on Aaron's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 17 Jun 2024 14:09:20 +0800</lastBuildDate><atom:link href="https://and2352000.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Google Cloud Summit Review</title><link>https://and2352000.github.io/posts/8-google-cloud-summit-review/</link><pubDate>Mon, 17 Jun 2024 14:09:20 +0800</pubDate><guid>https://and2352000.github.io/posts/8-google-cloud-summit-review/</guid><description>這次的 Google Cloud Summit 可以用 AI 來總結 🔗副標題可以叫做 RAG(Retrieval-Augmented Generation) 🔗這次的議程我參加了兩個 Workshop
-Migration from PostgreSQL to Alloy DB for accelerating GenAl Vector Search &amp;amp; Embedding Multimodality with Gemini 有趣的案例 🔗語音客製化
-Vertex AI 能夠進行類似人類的對話和互動，使得與客戶的交流更加自然，根據不同的語調性別年齡產生不同的語音還回應。 輿情分析 Tag 系統
-輿情分析的時候需要大量的人原來對留言進行標注，這時候LLM 就很適合代替標注的人員 LLM 的誤解 🔗大多數人已經對 LLM 有所涉獵，但對其局限性認識不足。LLM 雖然功能強大，但在相似度搜索方面還不夠精確，而且有時候會唬爛。因此，需要使用 RAG 來提高搜索的精確性， 通常來講你必須給他一個比較既定事實陳述
-Embedding 的基本概念 🔗簡單來說，Embedding 就是將一個對象轉換成向量，對象可以是任何數據（如語音、影片、文字）。然後透過向量搜索引擎找到與之最近的對象（即相似度最高的對象）。距離的算法有很多種，適用的場景也各不相同，有些適合全文搜索，有些則適合其他用途。
-在 Embedding 領域，各家技術都有其優勢。
-OpenAI 提供的嵌入向量有 3,072 維，而 Google 提供的嵌入向量則有 1,000 多維。Google 利用了其搜尋引擎的算法來生成這些嵌入向量。 不過市面上有很多開源的 embedding model ，距離的算法也很多，用的場景也不一樣
-即時更新最新的資料 🔗 假設你是一個電商 你就可以透過 Embedding 在不把資料庫暴露的情況 update 最新資料, 你這時候就會有疑問 fine-tune 呢？？ 主要是貴 fine-tune 適用在模型更新不頻繁的時候 Fine-tune 🔗Fine-tune 是在模型更新不頻繁時的最佳選擇，雖然成本較高，但能針對特定需求進行調整。Fine-tune 可以看作是對 LLM 的進一步教育，讓它在既有的基礎上更好地適應特定任務。</description></item><item><title>Manage Nodejs Heap in Docker</title><link>https://and2352000.github.io/posts/7-manage-nodejs-heap-in-docker/</link><pubDate>Mon, 26 Feb 2024 15:07:57 +0800</pubDate><guid>https://and2352000.github.io/posts/7-manage-nodejs-heap-in-docker/</guid><description>Container 記憶體調整 🔗在 local 調整 container 記憶體如下
-docker run --memory 1024m --interactive --tty ravali1906/dockermemory bash 但是這樣會有一個問題，有由於 container default 有 swap，所以即便用超過也不會Out of memory
-這段程式碼程式碼會 allocate 1024MB
-const buf = Buffer.alloc(+process.argv[2] * 1024 * 1024) console.log(Math.round(buf.length / (1024 * 1024))) console.log(Math.round(process.memoryUsage().rss / (1024 * 1024))) 執行結果
-$ node buffer_example 2000 2000 16 以上這段程式碼是參考 ref1 其實是有問題的 Buffer.alloc 並不會用使用到 heap
-我有重新實作但是還不完整&amp;hellip;..
-memoryUsage 有四個資訊 heapTotal and heapUsed refer to V8&amp;rsquo;s memory usage. external refers to the memory usage of C++ objects bound to JavaScript objects managed by V8.</description></item><item><title>Monitor Third Party Source Through JS proxy and Google Cloud Metric</title><link>https://and2352000.github.io/posts/js-proxy-with-cloud-metric/</link><pubDate>Tue, 18 Jul 2023 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/js-proxy-with-cloud-metric/</guid><description>Problem Face 🔗There&amp;rsquo;s too many function or class will build and each client (class of third party library). We need a general solution to help us to monitor different source from multiple vendor also each function of class.
-What we want to know? The following data Request Count, Response Count, Response Error Count can be aggregated according to the number of days or counted independently according to different types of functions, blockchains and suppliers, while maintaining flexibility Javascript proxy 🔗The Proxy object enables you to create a proxy for another object, which can intercept and redefine fundamental operations for that object.</description></item><item><title>K8S DIY 架設手作</title><link>https://and2352000.github.io/posts/build-own-k8s/</link><pubDate>Tue, 23 Aug 2022 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/build-own-k8s/</guid><description>環境準備 🔗 Public IP Domain Name 一台主機 灌好 Nginx 作為這台主機的入口 申請好 TLS 所需的憑證 一台 LoadBalancer 兼防火牆 Gitlab 帳號 Bootstrapping clusters with kubeadm 🔗官方安裝教學：https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
-A compatible Linux host. The Kubernetes project provides generic instructions for Linux distributions based on Debian and Red Hat, and those distributions without a package manager. 2 GB or more of RAM per machine (any less will leave little room for your apps). 2 CPUs or more. Full network connectivity between all machines in the cluster (public or private network is fine).</description></item><item><title>Make your own linux laptop</title><link>https://and2352000.github.io/posts/make-your-own-linux-laptop/</link><pubDate>Mon, 07 Jun 2021 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/make-your-own-linux-laptop/</guid><description>Make XPS13 Linux laptop 🔗筆電挑選 🔗Dell XPS13 支援 通過 Ubuntu 認證
-灌系統 選擇版本 顯示卡驅動 wifi驅動 🔗待補&amp;hellip;
-雙系統 dual os 🔗 https://medium.com/@josef.andersson/dual-boot-windows-10-and-ubuntu-18-10-on-dell-xps-9370-1a77ae9716bc https://estl.tech/dual-boot-ubuntu-on-dell-xps-1365df21b947 leagcy vs uefi 🔗磁區分割 🔗itread01.com/content/1549288804.html?fbclid=IwAR17jW3QC2M0FJjNWrbI5p_BFYBmQFN4g7kmvYqyfwR7IUKzFF_5BNEz7DY
-Grub 🔗The Dell XPS 13 came with a 4K screen. Unfortunately, the GRUB bootloader does not scale the text so everything was really tiny. It was really hard to see what operating system was selected for boot. This AskUbuntu page has the solution. Similar to the comment by Bernard Wei, the videoinfo command did not work for me.</description></item><item><title>Linux Tips</title><link>https://and2352000.github.io/posts/overthewire-copy/</link><pubDate>Tue, 07 Apr 2020 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/overthewire-copy/</guid><description>tmux(切割終端視窗＆保存工作狀態) 🔗按任何快捷鍵之前要先按 Ctrl + b
-Pane
-指令 說明 % 水平分割 &amp;quot; 垂直分割 方向鍵 切換pane x 刪除當前的pane Pane內操作
-指令 說明 [ Scroll in pane (q to Quit) 修改Pane分配比例，按下Ctrl+B，之後放開B並按上下左右調整視窗分配比 Ｍac的部分如果無法使用則可以參考這篇(mac可以改輸出的Acsii)
-Window
-指令 說明 c 創建新的window &amp;amp; 關閉目前的window p 切換到上一個window n 切換到下一個window Session
-指令 說明 tmux 開啟一個新的session tmux ls 查看所有session tmux attach -t 0 重新連線到session 0 tmux kill-session -t 0 刪除 session 0 d 跳出並保存當前session s 切換session Ubuntu 關閉 window 🔗 Stop windows of ubuntu(節省資源) sudo service lightdm stop User 換 shell 🔗chsh -s [/bin/bash] Ubuntu apt 檢查version&amp;amp;安裝 🔗#check apt-cache madison &amp;lt;&amp;lt;package name&amp;gt;&amp;gt; #install apt-get install &amp;lt;&amp;lt;package name&amp;gt;&amp;gt;=&amp;lt;&amp;lt;version&amp;gt;&amp;gt; https://www.</description></item><item><title>Overthewire</title><link>https://and2352000.github.io/posts/overthewire/</link><pubDate>Thu, 07 Feb 2019 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/overthewire/</guid><description>Bandit 🔗Level0 🔗Password : bandit0 Level0-&amp;gt;Level1 🔗Password : boJ9jbbUNNfktd78OOpsqOltutMc3MY1 Level1-&amp;gt;Level2 🔗Level2-&amp;gt;Level3 🔗Level3-&amp;gt;Level4 🔗Level4-&amp;gt;Level5 🔗Password : pIwrPrtPN36QITSp3EQaw936yaFoFgAB Level5-&amp;gt;Level6 🔗Password : koReBOKuIDDepwhWk7jZC0RTdopnAYKh Level6-&amp;gt;Level7 🔗Password : DXjZPULLxYr17uwoI01bNLQbtFemEgo7 Level7-&amp;gt;Level8 🔗Password : HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs Level8-&amp;gt;Level9 🔗Password : cvX2JJa4CFALtqS87jk27qwqGhBM9plV Level9-&amp;gt;Level10 🔗Password : UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR Level10-&amp;gt;Level11 🔗Password : truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk | | | | |
-Level17-&amp;gt;Level18 🔗Password : kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd Level18-&amp;gt;Level19 🔗$ ssh bandit18@bandit.labs.overthewire.org cat readme IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x Password : IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x :::info :mag:ssh後面可以接指令，當ssh執行指令完成後，預設會中斷連線。
-:::
-Level19-&amp;gt;Level20 🔗$ ./bandit20-do cat /etc/bandit_pass/bandit20 Password : GbKksEFF4yrVs6il55v6gwY5aVje5f0j :::info :mag: setuid : 在執行程式時，程式執行的身份為啟動該程式的user，若設為setuid，則該程式在執行身份就改為該程式的Owner。 :::</description></item><item><title>Ethereum Development</title><link>https://and2352000.github.io/posts/ethereum-develop/</link><pubDate>Thu, 07 Jun 2018 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/ethereum-develop/</guid><description>How to generate etheruem key pair 🔗key generate
-Ethereum Application Development 🔗 Enviriment 🔗Ubuntu 16.04LTS server Geth 1.83 stable Nodejs 8.11.1 web3.js 0.20.1
-eth-netstats 🔗It look like there&amp;rsquo;re two part one is netstats(監控端),and another one is client(客戶端) https://kairen.github.io/2017/05/26/blockchain/geth-monitoring/
-Web3.js 🔗go-ethereum和parity支援web3.js :::warning 如果你要透過套件安裝web3.js 的library，要注意geth內的web3版本(web3.version)，之前使用1.X.X版本有問題，目前改為0.2X.X版 :::
-可以由此查看web3.js版本0.20.1 API v0.2X.X
-Upadate 2018/6/4 : web3.js 1.0.0 is more efficient accounts.sign v.s eth.sign 🔗There&amp;rsquo;s a little bit diff between accounts.sign &amp;amp; eth.sign, you can&amp;rsquo;t encode by one of the and decode by another one.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Aaron's Blog</title><link>https://and2352000.github.io/posts/</link><description>Recent content in Posts on Aaron's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 18 Mar 2025 16:06:44 +0800</lastBuildDate><atom:link href="https://and2352000.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>用 Node.js 打造 Elegant API Framework：awilix、zod、zod-openapi 的導入與改變</title><link>https://and2352000.github.io/posts/10-elegant-framework-api-node-js/</link><pubDate>Tue, 18 Mar 2025 16:06:44 +0800</pubDate><guid>https://and2352000.github.io/posts/10-elegant-framework-api-node-js/</guid><description>&lt;h1 id="用-nodejs-打造-elegant-api-frameworkawilixzodzod-openapi-的導入與改變">用 Node.js 打造 Elegant API Framework：awilix、zod、zod-openapi 的導入與改變 &lt;a href="#%e7%94%a8-nodejs-%e6%89%93%e9%80%a0-elegant-api-frameworkawilixzodzod-openapi-%e7%9a%84%e5%b0%8e%e5%85%a5%e8%88%87%e6%94%b9%e8%ae%8a" class="anchor">🔗&lt;/a>&lt;/h1>&lt;p>今天我要來聊聊我的專案：&lt;a href="https://github.com/and2352000/elegant-api-framework-node-js" target="_blank" rel="noopener">Elegant API Framework for Node.js&lt;/a>。這個 API 框架目標是讓 Node.js API 專案開發變得更優雅，使用 &lt;code>awilix&lt;/code>、&lt;code>zod&lt;/code> 和 &lt;code>zod-openapi&lt;/code> 這三個工具，讓我的專案變得更乾淨、更易於維護。&lt;/p>
+&lt;hr>
+&lt;h2 id="專案初衷優雅與結構並存">專案初衷：優雅與結構並存 &lt;a href="#%e5%b0%88%e6%a1%88%e5%88%9d%e8%a1%b7%e5%84%aa%e9%9b%85%e8%88%87%e7%b5%90%e6%a7%8b%e4%b8%a6%e5%ad%98" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>我一開始做這個框架的時候，就想要解決 Node.js 開發中常見的痛點：依賴管理亂七八糟、資料驗證麻煩、API 文件難產。我用過 Express、Koa，也看過 NestJS 的做法，NestJS 基本上跟 Spring Boot 很像，NestJS 使用 TypeScript 的裝飾器來定義控制器、服務和其他組件，這與 Spring Boot 使用註解（Annotations）來配置應用程式的方式相似，但我很不喜歡被整個框架綁住，有時候覺得框架的存在限制的程式的擴展性，於是，我決定自己動手，打造一個既有彈性又有結構的框架。&lt;/p>
+&lt;hr>
+&lt;h2 id="導入-awilix依賴注入的救贖">導入 awilix：依賴注入的救贖 &lt;a href="#%e5%b0%8e%e5%85%a5-awilix%e4%be%9d%e8%b3%b4%e6%b3%a8%e5%85%a5%e7%9a%84%e6%95%91%e8%b4%96" class="anchor">🔗&lt;/a>&lt;/h2>&lt;h3 id="為什麼選-awilix">為什麼選 awilix？ &lt;a href="#%e7%82%ba%e4%bb%80%e9%ba%bc%e9%81%b8-awilix" class="anchor">🔗&lt;/a>&lt;/h3>&lt;p>為了測試容易，我需要能夠輕鬆替換依賴，於是我開始找依賴注入（DI）的解決方案，我以前寫 Node.js 時，依賴管理全靠手動，以下是我之前為了達到 Dependency Injection 的寫法，這個寫法只能達到單例模式。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 手動依賴注入
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">export&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">UserService&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#a6e22e">instance&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#a6e22e">UserService&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#a6e22e">constructor&lt;/span>(&lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#a6e22e">readonly&lt;/span> &lt;span style="color:#a6e22e">db&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#a6e22e">Database&lt;/span>) {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#a6e22e">getInstance&lt;/span>()&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#a6e22e">UserService&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#f92672">!&lt;/span>&lt;span style="color:#a6e22e">UserService&lt;/span>.&lt;span style="color:#a6e22e">instance&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">UserService&lt;/span>.&lt;span style="color:#a6e22e">instance&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#a6e22e">UserService&lt;/span>(&lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#a6e22e">Database&lt;/span>());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">UserService&lt;/span>.&lt;span style="color:#a6e22e">instance&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>NestJS 的 DI 很強，但太重量級；InversifyJS 也不錯，但也要依靠實驗性的功能 &lt;code>reflect-metadata&lt;/code> 這點我不是很喜歡。最後我發現了 &lt;code>awilix&lt;/code>，一個輕量又直觀的 DI 容器，完美符合我的需求。&lt;/p></description></item><item><title>Google Cloud Summit Review</title><link>https://and2352000.github.io/posts/8-google-cloud-summit-review/</link><pubDate>Mon, 17 Jun 2024 14:09:20 +0800</pubDate><guid>https://and2352000.github.io/posts/8-google-cloud-summit-review/</guid><description>&lt;p>&lt;p class="markdown-image">
+ &lt;img src="images/begin.JPG" alt="Begin" />
+&lt;/p>&lt;/p>
+&lt;h1 id="這次的-google-cloud-summit-可以用-ai-來總結">這次的 Google Cloud Summit 可以用 AI 來總結 &lt;a href="#%e9%80%99%e6%ac%a1%e7%9a%84-google-cloud-summit-%e5%8f%af%e4%bb%a5%e7%94%a8-ai-%e4%be%86%e7%b8%bd%e7%b5%90" class="anchor">🔗&lt;/a>&lt;/h1>&lt;h2 id="副標題可以叫做-ragretrieval-augmented-generation">副標題可以叫做 RAG(Retrieval-Augmented Generation) &lt;a href="#%e5%89%af%e6%a8%99%e9%a1%8c%e5%8f%af%e4%bb%a5%e5%8f%ab%e5%81%9a-ragretrieval-augmented-generation" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>這次的議程我參加了兩個 Workshop&lt;/p>
+&lt;ul>
+&lt;li>Migration from PostgreSQL to Alloy DB for accelerating
+GenAl Vector Search &amp;amp; Embedding&lt;/li>
+&lt;li>Multimodality with Gemini&lt;/li>
+&lt;/ul>
+&lt;h2 id="有趣的案例">有趣的案例 &lt;a href="#%e6%9c%89%e8%b6%a3%e7%9a%84%e6%a1%88%e4%be%8b" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>語音客製化&lt;/p>
+&lt;ul>
+&lt;li>Vertex AI 能夠進行類似人類的對話和互動，使得與客戶的交流更加自然，根據不同的語調性別年齡產生不同的語音還回應。
+&lt;p class="markdown-image">
+ &lt;img src="images/voice_usecase.png" alt="voice" />
+&lt;/p>&lt;/li>
+&lt;/ul>
+&lt;p>輿情分析 Tag 系統&lt;/p>
+&lt;ul>
+&lt;li>輿情分析的時候需要大量的人原來對留言進行標注，這時候LLM 就很適合代替標注的人員&lt;/li>
+&lt;/ul>
+&lt;h2 id="llm-的誤解">LLM 的誤解 &lt;a href="#llm-%e7%9a%84%e8%aa%a4%e8%a7%a3" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>大多數人已經對 LLM 有所涉獵，但對其局限性認識不足。LLM 雖然功能強大，但在相似度搜索方面還不夠精確，而且有時候會唬爛。因此，需要使用 RAG 來提高搜索的精確性， 通常來講你必須給他一個比較既定事實陳述&lt;/p>
+&lt;h2 id="embedding-的基本概念">Embedding 的基本概念 &lt;a href="#embedding-%e7%9a%84%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>簡單來說，Embedding 就是將一個對象轉換成向量，對象可以是任何數據（如語音、影片、文字）。然後透過向量搜索引擎找到與之最近的對象（即相似度最高的對象）。距離的算法有很多種，適用的場景也各不相同，有些適合全文搜索，有些則適合其他用途。&lt;/p>
+&lt;p>在 Embedding 領域，各家技術都有其優勢。&lt;/p>
+&lt;ul>
+&lt;li>OpenAI 提供的嵌入向量有 3,072 維，而&lt;/li>
+&lt;li>Google 提供的嵌入向量則有 1,000 多維。Google 利用了其搜尋引擎的算法來生成這些嵌入向量。&lt;/li>
+&lt;/ul>
+&lt;p>不過市面上有很多開源的 embedding model ，距離的算法也很多，用的場景也不一樣&lt;/p>
+&lt;h3 id="即時更新最新的資料">即時更新最新的資料 &lt;a href="#%e5%8d%b3%e6%99%82%e6%9b%b4%e6%96%b0%e6%9c%80%e6%96%b0%e7%9a%84%e8%b3%87%e6%96%99" class="anchor">🔗&lt;/a>&lt;/h3>&lt;ul>
+&lt;li>假設你是一個電商 你就可以透過 Embedding 在不把資料庫暴露的情況 update 最新資料, 你這時候就會有疑問 fine-tune 呢？？ 主要是貴 fine-tune 適用在模型更新不頻繁的時候&lt;/li>
+&lt;/ul>
+&lt;h2 id="fine-tune">Fine-tune &lt;a href="#fine-tune" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>Fine-tune 是在模型更新不頻繁時的最佳選擇，雖然成本較高，但能針對特定需求進行調整。Fine-tune 可以看作是對 LLM 的進一步教育，讓它在既有的基礎上更好地適應特定任務。&lt;/p></description></item><item><title>Manage Nodejs Heap in Docker</title><link>https://and2352000.github.io/posts/7-manage-nodejs-heap-in-docker/</link><pubDate>Mon, 26 Feb 2024 15:07:57 +0800</pubDate><guid>https://and2352000.github.io/posts/7-manage-nodejs-heap-in-docker/</guid><description>&lt;h2 id="container-記憶體調整">Container 記憶體調整 &lt;a href="#container-%e8%a8%98%e6%86%b6%e9%ab%94%e8%aa%bf%e6%95%b4" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>在 local 調整 container 記憶體如下&lt;/p>
+&lt;pre tabindex="0">&lt;code>docker run --memory 1024m --interactive --tty ravali1906/dockermemory bash
+&lt;/code>&lt;/pre>&lt;p>但是這樣會有一個問題，有由於 container default 有 swap，所以即便用超過也不會Out of memory&lt;/p>
+&lt;p>這段程式碼程式碼會 allocate 1024MB&lt;/p>
+&lt;pre tabindex="0">&lt;code>const buf = Buffer.alloc(+process.argv[2] * 1024 * 1024)
+console.log(Math.round(buf.length / (1024 * 1024)))
+console.log(Math.round(process.memoryUsage().rss / (1024 * 1024)))
+&lt;/code>&lt;/pre>&lt;p>執行結果&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ node buffer_example 2000
+2000
+16
+&lt;/code>&lt;/pre>&lt;p>以上這段程式碼是參考 ref1 其實是有問題的 Buffer.alloc 並不會用使用到 heap&lt;/p>
+&lt;p>我有重新實作但是還不完整&amp;hellip;..&lt;/p>
+&lt;ul>
+&lt;li>memoryUsage 有四個資訊
+&lt;ol>
+&lt;li>heapTotal and heapUsed refer to V8&amp;rsquo;s memory usage.&lt;/li>
+&lt;li>external refers to the memory usage of C++ objects bound to JavaScript objects managed by V8.&lt;/li>
+&lt;li>rss, Resident Set Size, is the amount of space occupied in the main memory device (that is a subset of the total allocated memory) for the process, including all C++ and JavaScript objects and code.&lt;/li>
+&lt;li>arrayBuffers refers to memory allocated for ArrayBuffers and SharedArrayBuffers, including all Node.js Buffers. This is also included in the external value. When Node.js is used as an embedded library, this value may be 0 because allocations for ArrayBuffers may not be tracked in that case.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;p>如果要檢查 container 的記憶體大小可以看這裡&lt;/p></description></item><item><title>Monitor Third Party Source Through JS proxy and Google Cloud Metric</title><link>https://and2352000.github.io/posts/js-proxy-with-cloud-metric/</link><pubDate>Tue, 18 Jul 2023 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/js-proxy-with-cloud-metric/</guid><description>&lt;h2 id="problem-face">Problem Face &lt;a href="#problem-face" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>There&amp;rsquo;s too many function or class will build and each client (class of third party library). We need a general solution to help us to monitor different source from multiple vendor also each function of class.&lt;/p>
+&lt;ul>
+&lt;li>What we want to know?
+The following data Request Count, Response Count, Response Error Count can be aggregated according to the number of days or counted independently according to different types of functions, blockchains and suppliers, while maintaining flexibility&lt;/li>
+&lt;/ul>
+&lt;h2 id="javascript-proxy">Javascript proxy &lt;a href="#javascript-proxy" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>The Proxy object enables you to create a proxy for another object, which can intercept and redefine fundamental operations for that object. &lt;a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy" target="_blank" rel="noopener">MDN JS Proxy&lt;/a>&lt;/p></description></item><item><title>K8S DIY 架設手作</title><link>https://and2352000.github.io/posts/build-own-k8s/</link><pubDate>Tue, 23 Aug 2022 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/build-own-k8s/</guid><description>&lt;h2 id="環境準備">環境準備 &lt;a href="#%e7%92%b0%e5%a2%83%e6%ba%96%e5%82%99" class="anchor">🔗&lt;/a>&lt;/h2>&lt;ul>
+&lt;li>Public IP&lt;/li>
+&lt;li>Domain Name&lt;/li>
+&lt;li>一台主機
+&lt;ul>
+&lt;li>灌好 Nginx 作為這台主機的入口&lt;/li>
+&lt;li>申請好 TLS 所需的憑證&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>一台 LoadBalancer 兼防火牆&lt;/li>
+&lt;li>Gitlab 帳號&lt;/li>
+&lt;/ul>
+&lt;p>&lt;p class="markdown-image">
+ &lt;img src="images/my_computer.png" alt="My Computer" />
+&lt;/p>&lt;/p>
+&lt;h2 id="bootstrapping-clusters-with-kubeadm">Bootstrapping clusters with kubeadm &lt;a href="#bootstrapping-clusters-with-kubeadm" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>官方安裝教學：https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/&lt;/p>
+&lt;ul>
+&lt;li>A compatible Linux host. The Kubernetes project provides generic instructions for Linux distributions based on Debian and Red Hat, and those distributions without a package manager.&lt;/li>
+&lt;li>2 GB or more of RAM per machine (any less will leave little room for your apps).&lt;/li>
+&lt;li>2 CPUs or more.&lt;/li>
+&lt;li>Full network connectivity between all machines in the cluster (public or private network is fine).&lt;/li>
+&lt;li>Unique hostname, MAC address, and product_uuid for every node. See here for more details.&lt;/li>
+&lt;li>Certain ports are open on your machines. See here for more details.&lt;/li>
+&lt;li>Swap disabled. You MUST disable swap in order for the kubelet to work properly.&lt;/li>
+&lt;/ul>
+&lt;h2 id="installing-a-container-runtime">Installing a container runtime &lt;a href="#installing-a-container-runtime" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>這裡可以選用你喜歡的，我選用 docker&lt;/p></description></item><item><title>Make your own linux laptop</title><link>https://and2352000.github.io/posts/make-your-own-linux-laptop/</link><pubDate>Mon, 07 Jun 2021 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/make-your-own-linux-laptop/</guid><description>&lt;h1 id="make-xps13-linux-laptop">Make XPS13 Linux laptop &lt;a href="#make-xps13-linux-laptop" class="anchor">🔗&lt;/a>&lt;/h1>&lt;h2 id="筆電挑選">筆電挑選 &lt;a href="#%e7%ad%86%e9%9b%bb%e6%8c%91%e9%81%b8" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>Dell XPS13 支援 通過 Ubuntu 認證&lt;/p>
+&lt;h2 id="灌系統-選擇版本-顯示卡驅動-wifi驅動">灌系統 選擇版本 顯示卡驅動 wifi驅動 &lt;a href="#%e7%81%8c%e7%b3%bb%e7%b5%b1-%e9%81%b8%e6%93%87%e7%89%88%e6%9c%ac-%e9%a1%af%e7%a4%ba%e5%8d%a1%e9%a9%85%e5%8b%95-wifi%e9%a9%85%e5%8b%95" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>待補&amp;hellip;&lt;/p>
+&lt;h2 id="雙系統-dual-os">雙系統 dual os &lt;a href="#%e9%9b%99%e7%b3%bb%e7%b5%b1-dual-os" class="anchor">🔗&lt;/a>&lt;/h2>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/@josef.andersson/dual-boot-windows-10-and-ubuntu-18-10-on-dell-xps-9370-1a77ae9716bc" target="_blank" rel="noopener">https://medium.com/@josef.andersson/dual-boot-windows-10-and-ubuntu-18-10-on-dell-xps-9370-1a77ae9716bc&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://estl.tech/dual-boot-ubuntu-on-dell-xps-1365df21b947" target="_blank" rel="noopener">https://estl.tech/dual-boot-ubuntu-on-dell-xps-1365df21b947&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="leagcy-vs-uefi">leagcy vs uefi &lt;a href="#leagcy-vs-uefi" class="anchor">🔗&lt;/a>&lt;/h2>&lt;h2 id="磁區分割">磁區分割 &lt;a href="#%e7%a3%81%e5%8d%80%e5%88%86%e5%89%b2" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>itread01.com/content/1549288804.html?fbclid=IwAR17jW3QC2M0FJjNWrbI5p_BFYBmQFN4g7kmvYqyfwR7IUKzFF_5BNEz7DY&lt;/p>
+&lt;h2 id="grub">Grub &lt;a href="#grub" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>The Dell XPS 13 came with a 4K screen. Unfortunately, the GRUB bootloader does not scale the text so everything was really tiny. It was really hard to see what operating system was selected for boot.
+This AskUbuntu page has the solution. Similar to the comment by Bernard Wei, the videoinfo command did not work for me. 1024x768 and 1280x1024 were both okay but not 1920x1080.&lt;/p></description></item><item><title>Linux Tips</title><link>https://and2352000.github.io/posts/overthewire-copy/</link><pubDate>Tue, 07 Apr 2020 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/overthewire-copy/</guid><description>&lt;h2 id="tmux切割終端視窗保存工作狀態">tmux(切割終端視窗＆保存工作狀態) &lt;a href="#tmux%e5%88%87%e5%89%b2%e7%b5%82%e7%ab%af%e8%a6%96%e7%aa%97%e4%bf%9d%e5%ad%98%e5%b7%a5%e4%bd%9c%e7%8b%80%e6%85%8b" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>按任何快捷鍵之前要先按 Ctrl + b&lt;/p>
+&lt;p>Pane&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>指令&lt;/th>
+ &lt;th>說明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>%&lt;/td>
+ &lt;td>水平分割&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&amp;quot;&lt;/td>
+ &lt;td>垂直分割&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>方向鍵&lt;/td>
+ &lt;td>切換pane&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>x&lt;/td>
+ &lt;td>刪除當前的pane&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>Pane內操作&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>指令&lt;/th>
+ &lt;th>說明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>[&lt;/td>
+ &lt;td>Scroll in pane (q to Quit)&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>修改Pane分配比例，按下Ctrl+B，之後放開B並按上下左右調整視窗分配比
+Ｍac的部分如果無法使用則可以參考&lt;a href="https://superuser.com/questions/660013/resizing-pane-is-not-working-for-tmux-on-mac" target="_blank" rel="noopener">這篇&lt;/a>(mac可以改輸出的Acsii)&lt;/p>
+&lt;p>Window&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>指令&lt;/th>
+ &lt;th>說明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>c&lt;/td>
+ &lt;td>創建新的window&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&amp;amp;&lt;/td>
+ &lt;td>關閉目前的window&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>p&lt;/td>
+ &lt;td>切換到上一個window&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>n&lt;/td>
+ &lt;td>切換到下一個window&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>Session&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>指令&lt;/th>
+ &lt;th>說明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>tmux&lt;/td>
+ &lt;td>開啟一個新的session&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>tmux ls&lt;/td>
+ &lt;td>查看所有session&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>tmux attach -t 0&lt;/td>
+ &lt;td>重新連線到session 0&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>tmux kill-session -t 0&lt;/td>
+ &lt;td>刪除 session 0&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>d&lt;/td>
+ &lt;td>跳出並保存當前session&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>s&lt;/td>
+ &lt;td>切換session&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="ubuntu-關閉-window">Ubuntu 關閉 window &lt;a href="#ubuntu-%e9%97%9c%e9%96%89-window" class="anchor">🔗&lt;/a>&lt;/h2>&lt;ul>
+&lt;li>Stop windows of ubuntu(節省資源)&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code class="language-shell=" data-lang="shell=">sudo service lightdm stop
+&lt;/code>&lt;/pre>&lt;h2 id="user-換-shell">User 換 shell &lt;a href="#user-%e6%8f%9b-shell" class="anchor">🔗&lt;/a>&lt;/h2>&lt;pre tabindex="0">&lt;code class="language-shell=" data-lang="shell=">chsh -s [/bin/bash]
+&lt;/code>&lt;/pre>&lt;h2 id="ubuntu-apt-檢查version安裝">Ubuntu apt 檢查version&amp;amp;安裝 &lt;a href="#ubuntu-apt-%e6%aa%a2%e6%9f%a5version%e5%ae%89%e8%a3%9d" class="anchor">🔗&lt;/a>&lt;/h2>&lt;pre tabindex="0">&lt;code class="language-shell=" data-lang="shell=">#check
+apt-cache madison &amp;lt;&amp;lt;package name&amp;gt;&amp;gt;
+
+#install
+apt-get install &amp;lt;&amp;lt;package name&amp;gt;&amp;gt;=&amp;lt;&amp;lt;version&amp;gt;&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://www.cnblogs.com/EasonJim/p/7144017.html" target="_blank" rel="noopener">https://www.cnblogs.com/EasonJim/p/7144017.html&lt;/a>&lt;/p></description></item><item><title>Overthewire</title><link>https://and2352000.github.io/posts/overthewire/</link><pubDate>Thu, 07 Feb 2019 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/overthewire/</guid><description>&lt;h2 id="bandit">Bandit &lt;a href="#bandit" class="anchor">🔗&lt;/a>&lt;/h2>&lt;h3 id="level0">Level0 &lt;a href="#level0" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : bandit0
+&lt;/code>&lt;/pre>&lt;h3 id="level0-level1">Level0-&amp;gt;Level1 &lt;a href="#level0-level1" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+&lt;/code>&lt;/pre>&lt;h3 id="level1-level2">Level1-&amp;gt;Level2 &lt;a href="#level1-level2" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>&lt;/code>&lt;/pre>&lt;h3 id="level2-level3">Level2-&amp;gt;Level3 &lt;a href="#level2-level3" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>&lt;/code>&lt;/pre>&lt;h3 id="level3-level4">Level3-&amp;gt;Level4 &lt;a href="#level3-level4" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>&lt;/code>&lt;/pre>&lt;h3 id="level4-level5">Level4-&amp;gt;Level5 &lt;a href="#level4-level5" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+&lt;/code>&lt;/pre>&lt;h3 id="level5-level6">Level5-&amp;gt;Level6 &lt;a href="#level5-level6" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+&lt;/code>&lt;/pre>&lt;h3 id="level6-level7">Level6-&amp;gt;Level7 &lt;a href="#level6-level7" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+&lt;/code>&lt;/pre>&lt;h3 id="level7-level8">Level7-&amp;gt;Level8 &lt;a href="#level7-level8" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+&lt;/code>&lt;/pre>&lt;h3 id="level8-level9">Level8-&amp;gt;Level9 &lt;a href="#level8-level9" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+&lt;/code>&lt;/pre>&lt;h3 id="level9-level10">Level9-&amp;gt;Level10 &lt;a href="#level9-level10" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+&lt;/code>&lt;/pre>&lt;h3 id="level10-level11">Level10-&amp;gt;Level11 &lt;a href="#level10-level11" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+&lt;/code>&lt;/pre>&lt;p>|
+|
+|
+|
+|&lt;/p>
+&lt;h3 id="level17-level18">Level17-&amp;gt;Level18 &lt;a href="#level17-level18" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>Password : kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+&lt;/code>&lt;/pre>&lt;h3 id="level18-level19">Level18-&amp;gt;Level19 &lt;a href="#level18-level19" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>$ ssh bandit18@bandit.labs.overthewire.org cat readme
+IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+
+Password : IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+&lt;/code>&lt;/pre>&lt;p>:::info
+:mag:ssh後面可以接指令，當ssh執行指令完成後，預設會中斷連線。&lt;/p>
+&lt;p>:::&lt;/p>
+&lt;h3 id="level19-level20">Level19-&amp;gt;Level20 &lt;a href="#level19-level20" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>$ ./bandit20-do cat /etc/bandit_pass/bandit20
+
+Password : GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+&lt;/code>&lt;/pre>&lt;p>:::info
+:mag: setuid : 在執行程式時，程式執行的身份為啟動該程式的user，若設為setuid，則該程式在執行身份就改為該程式的Owner。
+:::&lt;/p>
+&lt;h3 id="level20-level21">Level20-&amp;gt;Level21 &lt;a href="#level20-level21" class="anchor">🔗&lt;/a>&lt;/h3>&lt;pre tabindex="0">&lt;code>//使用tmux 開啟兩的terminal
+$ tmux
+
+//進入terminal 0,並進入terminal 1
+$tmux new-window
+
+//使用nc -l 開啟一個port,並把要傳輸的檔案放入
+$ nc -l 32123 &amp;lt; /etc/bandit_pass/bandit20
+
+// ctrl+b 再按0,進入termainal 0
+$./suconnect 32123
+
+Password : gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
+&lt;/code>&lt;/pre>&lt;p>:::info
+:mag: 指令tmux 可以在同一個視窗管理不同session的terminal
+:::&lt;/p></description></item><item><title>Ethereum Development</title><link>https://and2352000.github.io/posts/ethereum-develop/</link><pubDate>Thu, 07 Jun 2018 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/ethereum-develop/</guid><description>&lt;h2 id="how-to-generate-etheruem-key-pair">How to generate etheruem key pair &lt;a href="#how-to-generate-etheruem-key-pair" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>&lt;a href="https://kobl.one/blog/create-full-ethereum-keypair-and-address/#generating-the-ec-private-key" target="_blank" rel="noopener">key generate&lt;/a>&lt;/p>
+&lt;h2 id="ethereum-application-development">Ethereum Application Development &lt;a href="#ethereum-application-development" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>&lt;p class="markdown-image">
+ &lt;img src="https://i.imgur.com/FHLFkSe.png" alt="" />
+&lt;/p>&lt;/p>
+&lt;h2 id="enviriment">Enviriment &lt;a href="#enviriment" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>Ubuntu 16.04LTS server
+Geth 1.83 stable
+Nodejs 8.11.1
+web3.js 0.20.1&lt;/p>
+&lt;h2 id="eth-netstats">eth-netstats &lt;a href="#eth-netstats" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>It look like there&amp;rsquo;re two part one is netstats(監控端),and another one is client(客戶端)
+&lt;a href="https://kairen.github.io/2017/05/26/blockchain/geth-monitoring/" target="_blank" rel="noopener">https://kairen.github.io/2017/05/26/blockchain/geth-monitoring/&lt;/a>&lt;/p>
+&lt;h2 id="web3js">Web3.js &lt;a href="#web3js" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>go-ethereum和parity支援web3.js
+:::warning
+如果你要透過套件安裝web3.js 的library，要注意geth內的web3版本(web3.version)，之前使用1.X.X版本有問題，目前改為0.2X.X版
+:::&lt;/p>
+&lt;p>可以&lt;a href="https://www.versioneye.com/nodejs/web3/0.20.1" target="_blank" rel="noopener">由此&lt;/a>查看web3.js版本0.20.1
+&lt;a href="https://github.com/ethereum/wiki/wiki/JavaScript-API" target="_blank" rel="noopener">API v0.2X.X&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>Upadate 2018/6/4 : web3.js 1.0.0 is more efficient&lt;/li>
+&lt;/ul>
+&lt;h3 id="accountssign-vs-ethsign">accounts.sign v.s eth.sign &lt;a href="#accountssign-vs-ethsign" class="anchor">🔗&lt;/a>&lt;/h3>&lt;p>There&amp;rsquo;s a little bit diff between accounts.sign &amp;amp; eth.sign, you can&amp;rsquo;t encode by one of the and decode by another one. That&amp;rsquo;s because they are encode with diff parameter.
+&lt;a href="https://ethereum.stackexchange.com/questions/35425/web3-js-eth-sign-vs-eth-accounts-sign-producing-different-signatures" target="_blank" rel="noopener">Web3.js : eth.sign() vs eth.accounts.sign() — producing different signatures?&lt;/a>&lt;/p></description></item></channel></rss>

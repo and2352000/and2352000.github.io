@@ -1,0 +1,189 @@
+<!doctype html><html lang=en-us><head><title>用 Node.js 打造 Elegant API Framework：awilix、zod、zod-openapi 的導入與改變 | Aaron's Blog</title>
+<meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="用 Node.js 打造 Elegant API Framework：awilix、zod、zod-openapi 的導入與改變 🔗今天我要來聊聊我的專案：Elegant API Framework for Node.js。這個 API 框架目標是讓 Node.js API 專案開發變得更優雅，使用 awilix、zod 和 zod-openapi 這三個工具，讓我的專案變得更乾淨、更易於維護。
+
+專案初衷：優雅與結構並存 🔗我一開始做這個框架的時候，就想要解決 Node.js 開發中常見的痛點：依賴管理亂七八糟、資料驗證麻煩、API 文件難產。我用過 Express、Koa，也看過 NestJS 的做法，NestJS 基本上跟 Spring Boot 很像，NestJS 使用 TypeScript 的裝飾器來定義控制器、服務和其他組件，這與 Spring Boot 使用註解（Annotations）來配置應用程式的方式相似，但我很不喜歡被整個框架綁住，有時候覺得框架的存在限制的程式的擴展性，於是，我決定自己動手，打造一個既有彈性又有結構的框架。
+
+導入 awilix：依賴注入的救贖 🔗為什麼選 awilix？ 🔗為了測試容易，我需要能夠輕鬆替換依賴，於是我開始找依賴注入（DI）的解決方案，我以前寫 Node.js 時，依賴管理全靠手動，以下是我之前為了達到 Dependency Injection 的寫法，這個寫法只能達到單例模式。
+// 手動依賴注入
+export class UserService {
+  private static instance: UserService;
+  private constructor(private readonly db: Database) {}
+
+  public static getInstance(): UserService {
+    if (!UserService.instance) {
+      UserService.instance = new UserService(new Database());
+    }
+    return UserService.instance;
+  }
+}
+NestJS 的 DI 很強，但太重量級；InversifyJS 也不錯，但也要依靠實驗性的功能 reflect-metadata 這點我不是很喜歡。最後我發現了 awilix，一個輕量又直觀的 DI 容器，完美符合我的需求。"><meta name=generator content="Hugo 0.145.0"><meta name=ROBOTS content="NOINDEX, NOFOLLOW"><link rel=stylesheet href=/css/style.css><link rel="shortcut icon" href=/images/favicon.ico type=image/x-icon><script async src="https://www.googletagmanager.com/gtag/js?id=G-0YBZ467R0Y"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-0YBZ467R0Y")}</script></head><body><nav class=navigation><a href=/><span class=arrow>←</span>Home</a>
+<a href=/posts>Archive</a>
+<a href=/tags>Tags</a>
+<a href=/about>About</a></nav><main class=main><section id=single><h1 class=title>用 Node.js 打造 Elegant API Framework：awilix、zod、zod-openapi 的導入與改變</h1><div class=tip><time datetime="2025-03-18 16:06:44 +0800 +0800">Mar 18, 2025</time>
+<span class=split>·
+</span><span>624 words
+</span><span class=split>·
+</span><span>3 minute read</span></div><div class=content><h1 id=用-nodejs-打造-elegant-api-frameworkawilixzodzod-openapi-的導入與改變>用 Node.js 打造 Elegant API Framework：awilix、zod、zod-openapi 的導入與改變 <a href=#%e7%94%a8-nodejs-%e6%89%93%e9%80%a0-elegant-api-frameworkawilixzodzod-openapi-%e7%9a%84%e5%b0%8e%e5%85%a5%e8%88%87%e6%94%b9%e8%ae%8a class=anchor>🔗</a></h1><p>今天我要來聊聊我的專案：<a href=https://github.com/and2352000/elegant-api-framework-node-js target=_blank rel=noopener>Elegant API Framework for Node.js</a>。這個 API 框架目標是讓 Node.js API 專案開發變得更優雅，使用 <code>awilix</code>、<code>zod</code> 和 <code>zod-openapi</code> 這三個工具，讓我的專案變得更乾淨、更易於維護。</p><hr><h2 id=專案初衷優雅與結構並存>專案初衷：優雅與結構並存 <a href=#%e5%b0%88%e6%a1%88%e5%88%9d%e8%a1%b7%e5%84%aa%e9%9b%85%e8%88%87%e7%b5%90%e6%a7%8b%e4%b8%a6%e5%ad%98 class=anchor>🔗</a></h2><p>我一開始做這個框架的時候，就想要解決 Node.js 開發中常見的痛點：依賴管理亂七八糟、資料驗證麻煩、API 文件難產。我用過 Express、Koa，也看過 NestJS 的做法，NestJS 基本上跟 Spring Boot 很像，NestJS 使用 TypeScript 的裝飾器來定義控制器、服務和其他組件，這與 Spring Boot 使用註解（Annotations）來配置應用程式的方式相似，但我很不喜歡被整個框架綁住，有時候覺得框架的存在限制的程式的擴展性，於是，我決定自己動手，打造一個既有彈性又有結構的框架。</p><hr><h2 id=導入-awilix依賴注入的救贖>導入 awilix：依賴注入的救贖 <a href=#%e5%b0%8e%e5%85%a5-awilix%e4%be%9d%e8%b3%b4%e6%b3%a8%e5%85%a5%e7%9a%84%e6%95%91%e8%b4%96 class=anchor>🔗</a></h2><h3 id=為什麼選-awilix>為什麼選 awilix？ <a href=#%e7%82%ba%e4%bb%80%e9%ba%bc%e9%81%b8-awilix class=anchor>🔗</a></h3><p>為了測試容易，我需要能夠輕鬆替換依賴，於是我開始找依賴注入（DI）的解決方案，我以前寫 Node.js 時，依賴管理全靠手動，以下是我之前為了達到 Dependency Injection 的寫法，這個寫法只能達到單例模式。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// 手動依賴注入
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UserService</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#a6e22e>instance</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>UserService</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>constructor</span>(<span style=color:#66d9ef>private</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>db</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Database</span>) {}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#a6e22e>getInstance</span>()<span style=color:#f92672>:</span> <span style=color:#a6e22e>UserService</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span><span style=color:#a6e22e>UserService</span>.<span style=color:#a6e22e>instance</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>UserService</span>.<span style=color:#a6e22e>instance</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>UserService</span>(<span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Database</span>());
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>UserService</span>.<span style=color:#a6e22e>instance</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>NestJS 的 DI 很強，但太重量級；InversifyJS 也不錯，但也要依靠實驗性的功能 <code>reflect-metadata</code> 這點我不是很喜歡。最後我發現了 <code>awilix</code>，一個輕量又直觀的 DI 容器，完美符合我的需求。</p><h3 id=怎麼用的>怎麼用的？ <a href=#%e6%80%8e%e9%ba%bc%e7%94%a8%e7%9a%84 class=anchor>🔗</a></h3><p>我用 <code>awilix</code> 來管理所有的服務、控制器和儲存庫，把每個模組註冊到一個容器裡，然後在需要的地方自動解析。例如：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>const</span> { <span style=color:#a6e22e>createContainer</span>, <span style=color:#a6e22e>asClass</span>, <span style=color:#a6e22e>asFunction</span> } <span style=color:#f92672>=</span> <span style=color:#a6e22e>require</span>(<span style=color:#e6db74>&#39;awilix&#39;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 設定容器
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>container</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createContainer</span>()
+</span></span><span style=display:flex><span>  .<span style=color:#a6e22e>register</span>({
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>userService</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>asClass</span>(<span style=color:#a6e22e>UserService</span>).<span style=color:#a6e22e>singleton</span>(),
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>userController</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>asClass</span>(<span style=color:#a6e22e>UserController</span>).<span style=color:#66d9ef>transient</span>(),
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>db</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>asFunction</span>(() =&gt; <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Database</span>()),
+</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 控制器裡直接用
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UserController</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>constructor</span>({ <span style=color:#a6e22e>userService</span> }) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>userService</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>userService</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>getUser</span>(<span style=color:#a6e22e>req</span>, <span style=color:#a6e22e>res</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>user</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>userService</span>.<span style=color:#a6e22e>findById</span>(<span style=color:#a6e22e>req</span>.<span style=color:#a6e22e>params</span>.<span style=color:#a6e22e>id</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>res</span>.<span style=color:#a6e22e>json</span>(<span style=color:#a6e22e>user</span>);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>這裡注意你的取名必須要跟你 inject 服務一樣，也就是說同一個 module 可以有多個 inject 實例，你可以用不同的 Pattern 來達到不同的效果，這裡是<a href=https://github.com/jeffijoe/awilix target=_blank rel=noopener>官方</a>的原文三種不同的 Lifetime:</p><ul><li>Lifetime.TRANSIENT: This is the default. The registration is resolved every time it is needed. This means if you resolve a class more than once, you will get back a new instance every time.</li><li>Lifetime.SCOPED: The registration is scoped to the container - that means that the resolved value will be reused when resolved from the same scope (or a child scope).</li><li>Lifetime.SINGLETON: The registration is always reused no matter what - that means that the resolved value is cached in the root container.</li></ul><p>以上就可以讓你的服務和相依解耦，但他有一個缺點就是注入的時候是沒有型別的所以這邊就沒辦法直接點擊跳轉</p><h2 id=導入-zod資料驗證>導入 zod：資料驗證 <a href=#%e5%b0%8e%e5%85%a5-zod%e8%b3%87%e6%96%99%e9%a9%97%e8%ad%89 class=anchor>🔗</a></h2><h3 id=為什麼選-zod>為什麼選 zod？ <a href=#%e7%82%ba%e4%bb%80%e9%ba%bc%e9%81%b8-zod class=anchor>🔗</a></h3><p>API 框架少不了資料驗證，主流的驗證套件還有 Joi、Ajv，我選則 zod 單純是因為他跟 TypeScript 的整合的很好，當然他速度快而且輕量，它的語法簡潔，還能直接從 schema 推導出 TypeScript 型別，省下我手動寫介面的時間，這個優勢在於可以上程式碼的一致性很有有效地被維護，也打量減少需要維護的開發文件。</p><p>在我的框架裡，zod 負責處理所有的輸入驗證。比如定義一個用戶的 schema：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#a6e22e>userRouter</span>.<span style=color:#a6e22e>get</span>(<span style=color:#e6db74>&#39;/&#39;</span>, <span style=color:#66d9ef>async</span> (<span style=color:#a6e22e>ctx</span>) =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//NOTE: ！！！這一段 userController 是沒有型別的，相依也是從這裡開始注入
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>user</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>container</span>.<span style=color:#a6e22e>resolve</span>(<span style=color:#e6db74>&#39;userController&#39;</span>).<span style=color:#a6e22e>getUser</span>(<span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>request</span>.<span style=color:#a6e22e>params</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>body</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>user</span>;
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>const</span> { <span style=color:#a6e22e>z</span> } <span style=color:#f92672>=</span> <span style=color:#a6e22e>require</span>(<span style=color:#e6db74>&#39;zod&#39;</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>routerSchemaCheck</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;../middleware/validator&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>postUserSchema</span> <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Openapi 需要用到的定義 
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>path</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;/user&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>method</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;post&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>tags</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#39;user&#39;</span>],
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 定義 schema
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>body</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>z</span>.<span style=color:#a6e22e>object</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>z</span>.<span style=color:#a6e22e>string</span>()
+</span></span><span style=display:flex><span>    }),
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>userRouter</span>.<span style=color:#a6e22e>post</span>(<span style=color:#e6db74>&#39;/&#39;</span>, <span style=color:#a6e22e>routerSchemaCheck</span>(<span style=color:#a6e22e>postUserSchema</span>), <span style=color:#66d9ef>async</span> (<span style=color:#a6e22e>ctx</span>) =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>body</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>request</span>.<span style=color:#a6e22e>body</span> <span style=color:#a6e22e>as</span> <span style=color:#a6e22e>z</span>.<span style=color:#a6e22e>infer</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>typeof</span> <span style=color:#a6e22e>postUserSchema</span>.<span style=color:#a6e22e>body</span><span style=color:#f92672>&gt;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>user</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>container</span>.<span style=color:#a6e22e>resolve</span>(<span style=color:#e6db74>&#39;userService&#39;</span>).<span style=color:#a6e22e>createUser</span>(<span style=color:#a6e22e>body</span>.<span style=color:#a6e22e>name</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>body</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>user</span>;
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>從路由可以看到，我們定義了一個 post 的 user 路由，並且使用 <code>routerSchemaCheck</code> 這個 middleware 來檢查輸入的資料是否符合我們定義的 schema，如果符合，就會把資料轉換成我們定義的型別，並且傳遞給 controller 處理，如果資料不符合預期，不但會回傳錯誤還會指出正確的欄位以及可以填入的資料(包括對 enum 的支持)
+routerSchemaCheck 的實作如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>routerSchemaCheck</span> (<span style=color:#a6e22e>schema</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>SchemaCheck</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>async</span> (<span style=color:#a6e22e>ctx</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Context</span>, <span style=color:#a6e22e>next</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Next</span>) =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>schema</span>.<span style=color:#a6e22e>body</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>request</span>.<span style=color:#a6e22e>body</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>schema</span>.<span style=color:#a6e22e>body</span>.<span style=color:#a6e22e>parse</span>(<span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>request</span>.<span style=color:#a6e22e>body</span>)
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>schema</span>.<span style=color:#a6e22e>query</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>query</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>schema</span>.<span style=color:#a6e22e>query</span>.<span style=color:#a6e22e>parse</span>(<span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>query</span>)
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>schema</span>.<span style=color:#a6e22e>params</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>params</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>schema</span>.<span style=color:#a6e22e>params</span>.<span style=color:#a6e22e>parse</span>(<span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>params</span>)
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>next</span>()
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>catch</span> (<span style=color:#a6e22e>error</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>error</span> <span style=color:#66d9ef>instanceof</span> <span style=color:#a6e22e>ZodError</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>createErrorResponse</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>RouterSchemaCheckErrorResponse</span>(<span style=color:#e6db74>&#39;Parameter validation failed&#39;</span>), <span style=color:#a6e22e>error</span>)
+</span></span><span style=display:flex><span>      } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throw</span> <span style=color:#a6e22e>error</span>
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RouterSchemaCheckErrorResponse</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>ErrorResponse</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>constructor</span> (<span style=color:#a6e22e>message</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>string</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>super</span>(<span style=color:#e6db74>&#39;router-schema/check-error&#39;</span>, <span style=color:#a6e22e>message</span>, <span style=color:#ae81ff>400</span>)
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Error response 的回應如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;code&#34;</span>: <span style=color:#e6db74>&#34;router-schema/check-error&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;message&#34;</span>: <span style=color:#e6db74>&#34;Parameter validation failed&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;data&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;issues&#34;</span>: [
+</span></span><span style=display:flex><span>      {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;code&#34;</span>: <span style=color:#e6db74>&#34;invalid_type&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;expected&#34;</span>: <span style=color:#e6db74>&#34;string&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;received&#34;</span>: <span style=color:#e6db74>&#34;undefined&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;path&#34;</span>: [
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34;name&#34;</span>
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;message&#34;</span>: <span style=color:#e6db74>&#34;Required&#34;</span>
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    ],
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;ZodError&#34;</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=改變了什麼>改變了什麼？ <a href=#%e6%94%b9%e8%ae%8a%e4%ba%86%e4%bb%80%e9%ba%bc class=anchor>🔗</a></h2><ul><li>型別安全：從 userSchema.parse() 出來的資料直接有 TypeScript 型別，不用再自己定義 interface，爽度爆表。</li><li>錯誤處理超直觀：zod 的錯誤訊息清晰到不行，還能自訂，API 的回應品質直接提升。</li><li>開發效率：以前驗證邏輯散在各處，現在統一用 schema，既乾淨又好維護。</li><li>心得？zod 不只是驗證工具，它簡直是 TypeScript 生態的秘密武器，讓我的框架在處理輸入資料時又快又穩。</li></ul><h2 id=導入-zod-openapiapi-文件的自動化>導入 zod-openapi：API 文件的自動化 <a href=#%e5%b0%8e%e5%85%a5-zod-openapiapi-%e6%96%87%e4%bb%b6%e7%9a%84%e8%87%aa%e5%8b%95%e5%8c%96 class=anchor>🔗</a></h2><p>zod 擁有豐富的插件這邊可以看到<a href=https://www.npmjs.com/package/zod target=_blank rel=noopener>zod 的插件</a><br>API 文件是一個很麻煩的東西，當團隊一大就會希望有文件來作為溝通的橋樑，手動寫 openapi 文件又累又容易過時。 zod-openapi 是 zod 的擴充，可以把 zod schema 直接轉成 OpenAPI 規格，還能輸出標準的 JSON 文件，那至於要怎麼去選擇UI 就看自己的需求。</p><p>至於怎麼把 openapi 的 document 產出來 幾本上就是寫一個小的插件去掃描所有 router 的 schema 根據上面的定義去產出，細節就不詳述有興趣的可以看</p><p>產出來的資料長這樣：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;openapi&#34;</span>: <span style=color:#e6db74>&#34;3.1.0&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;info&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;Elegant API Framework&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;version&#34;</span>: <span style=color:#e6db74>&#34;1.0.0&#34;</span>
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;servers&#34;</span>: [
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;url&#34;</span>: <span style=color:#e6db74>&#34;http://localhost:6969&#34;</span>,
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;Local Development&#34;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  ],
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;paths&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;/user&#34;</span>: {
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;post&#34;</span>: {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;tags&#34;</span>: [
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34;user&#34;</span>
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;requestBody&#34;</span>: {
+</span></span><span style=display:flex><span>          <span style=color:#f92672>&#34;content&#34;</span>: {
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;application/json&#34;</span>: {
+</span></span><span style=display:flex><span>              <span style=color:#f92672>&#34;schema&#34;</span>: {
+</span></span><span style=display:flex><span>                <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;object&#34;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#f92672>&#34;properties&#34;</span>: {
+</span></span><span style=display:flex><span>                  <span style=color:#f92672>&#34;name&#34;</span>: {
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;string&#34;</span>
+</span></span><span style=display:flex><span>                  }
+</span></span><span style=display:flex><span>                },
+</span></span><span style=display:flex><span>                <span style=color:#f92672>&#34;required&#34;</span>: [
+</span></span><span style=display:flex><span>                  <span style=color:#e6db74>&#34;name&#34;</span>
+</span></span><span style=display:flex><span>                ]
+</span></span><span style=display:flex><span>              }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>          }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;responses&#34;</span>: {
+</span></span><span style=display:flex><span>          <span style=color:#f92672>&#34;200&#34;</span>: {
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;Success&#34;</span>
+</span></span><span style=display:flex><span>          }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>      },
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;get&#34;</span>: {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;tags&#34;</span>: [
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34;user&#34;</span>
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;responses&#34;</span>: {
+</span></span><span style=display:flex><span>          <span style=color:#f92672>&#34;200&#34;</span>: {
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;Success&#34;</span>
+</span></span><span style=display:flex><span>          }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>然後這個 spec 可以直接丟給 Swagger UI 或其他工具，生成漂亮的 API 文件。</p><h2 id=總結>總結 <a href=#%e7%b8%bd%e7%b5%90 class=anchor>🔗</a></h2><hr><p>這篇文章中，我們探討了如何建立一個優雅的 Node.js API 框架，主要聚焦在以下幾個關鍵點：</p><ol><li><strong>程式碼即文件</strong>：透過 OpenAPI 規範，我們讓 API 的定義和文件成為程式碼的一部分，確保文件永遠與實際實作同步。</li><li><strong>開發者體驗優先</strong>：設計框架時以開發者體驗為核心，提供清晰的 API 結構和自動生成的文件，大幅降低學習和使用成本。</li><li><strong>自動化與一致性</strong>：透過框架的設計，我們實現了 API 定義、驗證和文件的自動化，同時確保了跨專案的一致性。</li><li><strong>減少重複工作</strong>：不再需要手動維護文件或編寫重複的驗證邏輯，讓開發者可以專注於業務邏輯的實現。</li></ol><p>這種方法不僅提高了開發效率，也確保了 API 的品質和可維護性，特別適合需要快速迭代和長期維護的專案。</p></div><div class=tags><a href=https://and2352000.github.io/tags/nodejs>nodejs</a>
+<a href=https://and2352000.github.io/tags/koa>koa</a>
+<a href=https://and2352000.github.io/tags/zod>zod</a>
+<a href=https://and2352000.github.io/tags/api>api</a></div></section></main><footer id=footer><div class=copyright>© Copyright
+2025
+<span class=split><svg fill="#bbb" width="15" height="15" id="heart-15" width="15" height="15" viewBox="0 0 15 15"><path d="M13.91 6.75c-1.17 2.25-4.3 5.31-6.07 6.94-.1903.1718-.4797.1718-.67.0C5.39 12.06 2.26 9 1.09 6.75-1.48 1.8 5-1.5 7.5 3.45 10-1.5 16.48 1.8 13.91 6.75z"/></svg></span></div><div class=powerby>Powered by <a href=http://www.gohugo.io/>Hugo</a> Theme By <a href=https://github.com/nodejh/hugo-theme-mini>nodejh</a></div></footer></body></html>

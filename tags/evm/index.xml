@@ -1,6 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Evm on Aaron's Blog</title><link>https://and2352000.github.io/tags/evm/</link><description>Recent content in Evm on Aaron's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 07 Jun 2018 14:01:30 +0800</lastBuildDate><atom:link href="https://and2352000.github.io/tags/evm/index.xml" rel="self" type="application/rss+xml"/><item><title>Ethereum Development</title><link>https://and2352000.github.io/posts/ethereum-develop/</link><pubDate>Thu, 07 Jun 2018 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/ethereum-develop/</guid><description>How to generate etheruem key pair 🔗key generate
-Ethereum Application Development 🔗 Enviriment 🔗Ubuntu 16.04LTS server Geth 1.83 stable Nodejs 8.11.1 web3.js 0.20.1
-eth-netstats 🔗It look like there&amp;rsquo;re two part one is netstats(監控端),and another one is client(客戶端) https://kairen.github.io/2017/05/26/blockchain/geth-monitoring/
-Web3.js 🔗go-ethereum和parity支援web3.js :::warning 如果你要透過套件安裝web3.js 的library，要注意geth內的web3版本(web3.version)，之前使用1.X.X版本有問題，目前改為0.2X.X版 :::
-可以由此查看web3.js版本0.20.1 API v0.2X.X
-Upadate 2018/6/4 : web3.js 1.0.0 is more efficient accounts.sign v.s eth.sign 🔗There&amp;rsquo;s a little bit diff between accounts.sign &amp;amp; eth.sign, you can&amp;rsquo;t encode by one of the and decode by another one.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Evm on Aaron's Blog</title><link>https://and2352000.github.io/tags/evm/</link><description>Recent content in Evm on Aaron's Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 07 Jun 2018 14:01:30 +0800</lastBuildDate><atom:link href="https://and2352000.github.io/tags/evm/index.xml" rel="self" type="application/rss+xml"/><item><title>Ethereum Development</title><link>https://and2352000.github.io/posts/ethereum-develop/</link><pubDate>Thu, 07 Jun 2018 14:01:30 +0800</pubDate><guid>https://and2352000.github.io/posts/ethereum-develop/</guid><description>&lt;h2 id="how-to-generate-etheruem-key-pair">How to generate etheruem key pair &lt;a href="#how-to-generate-etheruem-key-pair" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>&lt;a href="https://kobl.one/blog/create-full-ethereum-keypair-and-address/#generating-the-ec-private-key" target="_blank" rel="noopener">key generate&lt;/a>&lt;/p>
+&lt;h2 id="ethereum-application-development">Ethereum Application Development &lt;a href="#ethereum-application-development" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>&lt;p class="markdown-image">
+ &lt;img src="https://i.imgur.com/FHLFkSe.png" alt="" />
+&lt;/p>&lt;/p>
+&lt;h2 id="enviriment">Enviriment &lt;a href="#enviriment" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>Ubuntu 16.04LTS server
+Geth 1.83 stable
+Nodejs 8.11.1
+web3.js 0.20.1&lt;/p>
+&lt;h2 id="eth-netstats">eth-netstats &lt;a href="#eth-netstats" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>It look like there&amp;rsquo;re two part one is netstats(監控端),and another one is client(客戶端)
+&lt;a href="https://kairen.github.io/2017/05/26/blockchain/geth-monitoring/" target="_blank" rel="noopener">https://kairen.github.io/2017/05/26/blockchain/geth-monitoring/&lt;/a>&lt;/p>
+&lt;h2 id="web3js">Web3.js &lt;a href="#web3js" class="anchor">🔗&lt;/a>&lt;/h2>&lt;p>go-ethereum和parity支援web3.js
+:::warning
+如果你要透過套件安裝web3.js 的library，要注意geth內的web3版本(web3.version)，之前使用1.X.X版本有問題，目前改為0.2X.X版
+:::&lt;/p>
+&lt;p>可以&lt;a href="https://www.versioneye.com/nodejs/web3/0.20.1" target="_blank" rel="noopener">由此&lt;/a>查看web3.js版本0.20.1
+&lt;a href="https://github.com/ethereum/wiki/wiki/JavaScript-API" target="_blank" rel="noopener">API v0.2X.X&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>Upadate 2018/6/4 : web3.js 1.0.0 is more efficient&lt;/li>
+&lt;/ul>
+&lt;h3 id="accountssign-vs-ethsign">accounts.sign v.s eth.sign &lt;a href="#accountssign-vs-ethsign" class="anchor">🔗&lt;/a>&lt;/h3>&lt;p>There&amp;rsquo;s a little bit diff between accounts.sign &amp;amp; eth.sign, you can&amp;rsquo;t encode by one of the and decode by another one. That&amp;rsquo;s because they are encode with diff parameter.
+&lt;a href="https://ethereum.stackexchange.com/questions/35425/web3-js-eth-sign-vs-eth-accounts-sign-producing-different-signatures" target="_blank" rel="noopener">Web3.js : eth.sign() vs eth.accounts.sign() — producing different signatures?&lt;/a>&lt;/p></description></item></channel></rss>
