@@ -1,7 +1,7 @@
 ---
 title: "用 Node.js 打造 Elegant API Framework：awilix、zod、zod-openapi 的導入與改變"
 date: 2025-03-18T16:06:44+08:00
-draft: true
+draft: false
 category: ""
 tags: ["nodejs", "koa", "zod", "api"]
 ---
