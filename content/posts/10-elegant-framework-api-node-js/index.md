@@ -67,6 +67,13 @@ class UserController {
 }
 ```
 
+```javascript
+userRouter.get('/', async (ctx) => {
+    //NOTE: ！！！這一段 userController 是沒有型別的，相依也是從這裡開始注入
+    const user = await container.resolve('userController').getUser(ctx.request.params)
+    ctx.body = user;
+})
+```
 這裡注意你的取名必須要跟你 inject 服務一樣，也就是說同一個 module 可以有多個 inject 實例，你可以用不同的 Pattern 來達到不同的效果，這裡是[官方](https://github.com/jeffijoe/awilix)的原文三種不同的 Lifetime:
 
 - Lifetime.TRANSIENT: This is the default. The registration is resolved every time it is needed. This means if you resolve a class more than once, you will get back a new instance every time.
@@ -81,13 +88,6 @@ API 框架少不了資料驗證，主流的驗證套件還有 Joi、Ajv，我選
 
 在我的框架裡，zod 負責處理所有的輸入驗證。比如定義一個用戶的 schema：
 
-```javascript
-userRouter.get('/', async (ctx) => {
-    //NOTE: ！！！這一段 userController 是沒有型別的，相依也是從這裡開始注入
-    const user = await container.resolve('userController').getUser(ctx.request.params)
-    ctx.body = user;
-})
-```
 
 ```javascript
 const { z } = require('zod');
